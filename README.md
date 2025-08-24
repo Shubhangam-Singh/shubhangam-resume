@@ -150,7 +150,6 @@ plugins: [react()],
 
 📥 **[Download Latest Resume (PDF)](https://shubhangam-singh.github.io/shubhangam-resume/shsi_resume.pdf)**
 
-*ATS-friendly format updated regularly*
 
 ## 🎨 Customization
 
