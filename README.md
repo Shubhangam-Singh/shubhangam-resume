@@ -77,7 +77,6 @@ shubhangam-resume/
 ├── postcss.config.js # PostCSS configuration
 └── README.md # Project documentation
 
-text
 
 ## 🚀 Quick Start
 
@@ -93,17 +92,14 @@ text
 git clone https://github.com/Shubhangam-Singh/shubhangam-resume.git
 cd shubhangam-resume
 
-text
 
 2️⃣ **Install dependencies**
 npm install
 
-text
 
 3️⃣ **Start development server**
 npm run dev
 
-text
 
 4️⃣ **Open your browser**
 Navigate to [http://localhost:5173/](http://localhost:5173/)
@@ -116,7 +112,6 @@ npm run preview # Preview production build locally
 npm run deploy # Deploy to GitHub Pages
 npm run lint # Run ESLint
 
-text
 
 ## 🌐 Deployment
 
@@ -125,12 +120,10 @@ text
 1. **Build the project**
 npm run build
 
-text
 
 2. **Deploy to GitHub Pages**
 npm run deploy
 
-text
 
 ### Configuration
 
@@ -140,7 +133,6 @@ base: '/shubhangam-resume/',
 plugins: [react()],
 });
 
-text
 
 ## 💼 Featured Projects
 
@@ -182,7 +174,6 @@ secondary: '#your-secondary-color',
 }
 }
 
-text
 
 ## 🤝 Contributing
 
