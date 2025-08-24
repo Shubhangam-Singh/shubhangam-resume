@@ -6,11 +6,19 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "deploy": "gh-pages -d dist"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "resume",
+    "portfolio",
+    "react",
+    "vite",
+    "tailwindcss"
+  ],
+  "author": "Shubhangam Singh",
   "license": "ISC",
+  "homepage": "https://Shubhangam-Singh.github.io/shubhangam-resume",
   "dependencies": {
     "lucide-react": "^0.367.0",
     "react": "^18.2.0",
@@ -21,7 +29,7 @@
     "@vitejs/plugin-react": "^5.0.1",
     "autoprefixer": "^10.4.21",
     "eslint": "^8.54.0",
-    "gh-pages": "^6.1.1",
+    "gh-pages": "^6.3.0",
     "postcss": "^8.4.31",
     "prettier": "^3.0.3",
     "tailwindcss": "^4.1.12",
