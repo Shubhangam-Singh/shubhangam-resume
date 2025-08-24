@@ -11,6 +11,9 @@ A modern, responsive, and professional resume website built using **React**, **V
 ## 🚀 [Live Demo](https://shubhangam-singh.github.io/shubhangam-resume/)
 
 ## 📱 Screenshots
+![Desktop View](https://github.com/user-attachments/assets/2a8e2e24-d196-43e8-a089-deba79829d05)
+![Desktop View](https://github.com/user-attachments/assets/1d48061e-ec93-49d8-a4f7-9263a668290a)
+![Desktop View](https://github.com/user-attachments/assets/0b1f8abb-60be-4f78-b238-a2e8ab5670d9)
 
 *Add screenshots of your website here*
 
