@@ -1,4 +1,4 @@
-/*  src/App.jsx – compact spacing, light theme */
+/*  src/App.jsx – fixed scroll spy navigation */
 
 import React, { useState, useEffect } from 'react'
 import Header           from './components/Header.jsx'
@@ -16,7 +16,6 @@ import MobileNavigation from './components/MobileNavigation.jsx'
 import './styles/MobileNavigation.css'
 
 export default function App () {
-  /* ─────────── state & helpers (unchanged) ─────────── */
   const [currentSection, setCurrentSection] = useState('summary')
   const [isMobile,       setIsMobile]       = useState(false)
   const [isNavSticky,    setIsNavSticky]    = useState(false)
@@ -28,6 +27,7 @@ export default function App () {
   ]
   const mobileSections  = ['summary','skills','projects','experience','contact']
 
+  // Resize and basic scroll detection
   useEffect(() => {
     const onResize = () => setIsMobile(window.innerWidth <= 768)
     const onScroll = () => setIsNavSticky(window.scrollY > 100)
@@ -40,17 +40,85 @@ export default function App () {
     }
   }, [])
 
+  // Improved scroll spy for both mobile and desktop
   useEffect(() => {
-    if (!isMobile || isLoading) return
-    const io = new IntersectionObserver(
-      es => es.forEach(e => e.isIntersecting && setCurrentSection(e.target.id)),
-      { threshold:0.3, rootMargin:'-100px 0px -200px 0px' }
-    )
-    sections.forEach(id => {
-      const el = document.getElementById(id); if (el) io.observe(el)
+    if (isLoading) return
+
+    // Use Intersection Observer for better performance
+    const observerOptions = {
+      threshold: 0.3,
+      rootMargin: isMobile ? '-100px 0px -200px 0px' : '-120px 0px -200px 0px'
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+      // Find the section that's most visible
+      let maxRatio = 0
+      let activeSection = currentSection
+
+      entries.forEach((entry) => {
+        if (entry.isIntersecting && entry.intersectionRatio > maxRatio) {
+          maxRatio = entry.intersectionRatio
+          activeSection = entry.target.id
+        }
+      })
+
+      // Fallback: if no section is intersecting enough, use scroll position
+      if (maxRatio < 0.3) {
+        const scrollPosition = window.scrollY + (isMobile ? 150 : 200)
+        
+        for (let i = sections.length - 1; i >= 0; i--) {
+          const element = document.getElementById(sections[i])
+          if (element && element.offsetTop <= scrollPosition) {
+            activeSection = sections[i]
+            break
+          }
+        }
+      }
+
+      if (activeSection !== currentSection) {
+        setCurrentSection(activeSection)
+      }
+    }, observerOptions)
+
+    // Observe all sections
+    sections.forEach(sectionId => {
+      const element = document.getElementById(sectionId)
+      if (element) observer.observe(element)
     })
-    return () => io.disconnect()
-  }, [isMobile, isLoading, sections])
+
+    // Additional scroll-based detection for edge cases
+    let ticking = false
+    const handleScroll = () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          const scrollPosition = window.scrollY + (isMobile ? 150 : 200)
+          let newSection = currentSection
+
+          // Check from bottom to top to prioritize later sections
+          for (let i = sections.length - 1; i >= 0; i--) {
+            const element = document.getElementById(sections[i])
+            if (element && element.offsetTop <= scrollPosition) {
+              newSection = sections[i]
+              break
+            }
+          }
+
+          if (newSection !== currentSection) {
+            setCurrentSection(newSection)
+          }
+          ticking = false
+        })
+        ticking = true
+      }
+    }
+
+    window.addEventListener('scroll', handleScroll, { passive: true })
+
+    return () => {
+      observer.disconnect()
+      window.removeEventListener('scroll', handleScroll)
+    }
+  }, [isLoading, isMobile, sections, currentSection])
 
   const scrollMarginClass =
     isMobile ? 'scroll-mt-24' : isNavSticky ? 'scroll-mt-36' : 'scroll-mt-24'
@@ -65,7 +133,7 @@ export default function App () {
         top: el.getBoundingClientRect().top + window.scrollY - offset,
         behavior:'smooth'
       })
-    }, 100)
+    }, 50) // Reduced delay for more responsive navigation
   }
 
   if (isLoading)
@@ -75,14 +143,12 @@ export default function App () {
       </div>
     )
 
-  /* ─────────── UI ─────────── */
   return (
     <div className="min-h-screen bg-white">
       <Header />
 
       {!isMobile && <Navigation current={currentSection} onSelect={goTo} />}
 
-      {/* original 48-px gaps between sections */}
       <main className="max-w-4xl mx-auto px-4 py-8 space-y-12">
         <section id="summary"      className={scrollMarginClass}><Summary /></section>
         <section id="skills"       className={scrollMarginClass}><Skills /></section>
@@ -110,29 +176,18 @@ export default function App () {
 
       {isNavSticky && (
         <button
-  aria-label="Scroll to top"
-  onClick={() => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-    setCurrentSection('summary');
-  }}
-  className={`
-  fixed z-50 p-3 rounded-full bg-blue-600 text-white
-  shadow-lg transition-transform hover:scale-110
-
-  /* phones   (<640 px) — bottom-left but lifted 96 px   */
-  bottom-24 left-4
-
-  /* tablets/desktop (≥640 px) — classic corner          */
-  sm:bottom-6 sm:left-6
-`}
-
->
-  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
-          d="M5 10l7-7 7 7M12 3v18"/>
-  </svg>
-</button>
-
+          aria-label="Scroll to top"
+          onClick={() => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            setCurrentSection('summary');
+          }}
+          className="fixed z-50 p-3 rounded-full bg-blue-600 text-white shadow-lg transition-transform hover:scale-110 bottom-24 left-4 sm:bottom-6 sm:left-6"
+        >
+          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
+                  d="M5 10l7-7 7 7M12 3v18"/>
+          </svg>
+        </button>
       )}
     </div>
   )
