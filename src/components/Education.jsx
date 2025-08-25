@@ -1,7 +1,7 @@
 import React from 'react'
 export default function Education(){
   const items = [
-    { degree:'B.Tech, Computer Science & Engineering', institution:'VIT Vellore', period:'Expected Graduation: July 2027', grade:'GPA: 8.99 / 10' },
+    { degree:'B.Tech, Computer Science & Engineering', institution:'VIT Vellore', period:'Expected Graduation: July 2027', grade:'CGPA: 8.99 / 10' },
     { degree:'Class XII (CBSE)', institution:'MV Convent, Allahabad', period:'2023', grade:'Percentage: 93%' },
     { degree:"Class X (ICSE)", institution:"Boys' High School & College, Allahabad", period:'2021', grade:'Percentage: 95%' }
   ]

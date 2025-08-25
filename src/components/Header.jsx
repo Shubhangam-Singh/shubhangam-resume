@@ -19,8 +19,8 @@ export default function Header() {
             <Phone size={16}/> <a href="tel:8299363396" className="hover:text-blue-200">8299363396</a>
           </div>
           <div className="flex items-center gap-2">
-            <Mail size={16}/> <a href="mailto:shubhangam.singh2023@vitstudent.ac.in" className="hover:text-blue-200">
-              shubhangam.singh2023@vitstudent.ac.in
+            <Mail size={16}/> <a href="mailto:shubhangam2005singh@gmail.com" className="hover:text-blue-200">
+              shubhangam2005singh@gmail.com
             </a>
           </div>
           <div className="flex items-center gap-2">

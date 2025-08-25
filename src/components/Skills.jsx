@@ -2,10 +2,10 @@ import React from 'react'
 export default function Skills(){
   const cats = [
     { title:'Languages', skills:['Java','C/C++','Python','Shell'] },
-    { title:'Web', skills:['HTML','CSS','JavaScript','React','NodeJS'] },
+    { title:'Web', skills:['HTML','CSS','JavaScript','React','NodeJS','Django'] },
     { title:'Blockchain', skills:['Solidity','Solana'] },
     { title:'Database', skills:['MySQL'] },
-    { title:'Data & Tools', skills:['R (statistical analysis)','MATLAB (Simulink)'] },
+    { title:'Data & Tools', skills:['R (statistical analysis)','MATLAB (Simulink)','Linux'] },
     { title:'Concepts', skills:['Data structures & algorithms','Software development lifecycle','Basic ML concepts'] },
     { title:'Soft Skills', skills:['Problem solving','Collaboration','Communication'] },
     { title:'Languages (Spoken)', skills:['English','Hindi'] }
