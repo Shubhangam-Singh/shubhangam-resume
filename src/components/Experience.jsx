@@ -1,12 +1,7 @@
 import React from 'react'
 export default function Experience(){
   const exps = [
-    { title:'Intern', company:'VIT-incubated startup', duration:'(add months/years)', bullets:[
-      'Collaborated with a small product team to deliver development and testing tasks.',
-      'Assisted in writing code, debugging, and preparing technical documentation.',
-      'Participated in design discussions and sprint planning; supported implementation of features.'
-    ]},
-    { title:'Intern', company:'Local NGO', duration:'(add months/years)', bullets:[
+    { title:'Intern', company:'Local NGO', bullets:[
       'Supported community-focused tech initiatives and awareness programs.',
       'Volunteered with NSS/Environmental Club to organize events and drive community outreach.',
       'Improved communication materials and helped coordinate volunteer activities.'

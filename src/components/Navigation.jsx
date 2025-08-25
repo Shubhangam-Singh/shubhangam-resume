@@ -1,46 +1,99 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState, useEffect } from 'react';
 
-export default function Navigation() {
-  const [active, setActive] = useState('')
+const Navigation = () => {
+  const [activeSection, setActiveSection] = useState('summary');
+  const [isSticky, setIsSticky] = useState(false);
+
+  // Define your sections
   const sections = [
-    { id: 'summary', label: 'Summary' },
-    { id: 'skills', label: 'Skills' },
-    { id: 'education', label: 'Education' },
-    { id: 'experience', label: 'Experience' },
-    { id: 'projects', label: 'Projects' },
-    { id: 'achievements', label: 'Achievements' },
-    { id: 'volunteering', label: 'Volunteering' },
-    { id: 'personal', label: 'Personal' },
-    { id: 'contact', label: 'Contact' }
-  ]
+    { id: 'summary', name: 'Summary' },
+    { id: 'skills', name: 'Skills' },
+    { id: 'education', name: 'Education' },
+    { id: 'experience', name: 'Experience' },
+    { id: 'projects', name: 'Projects' },
+    { id: 'achievements', name: 'Achievements' },
+    { id: 'volunteering', name: 'Volunteering' },
+    { id: 'personal', name: 'Personal' },
+    { id: 'contact', name: 'Contact' }
+  ];
 
+  // Sticky navigation effect
   useEffect(() => {
-    const onScroll = () => {
-      const y = window.scrollY + 100
-      for (const s of sections) {
-        const el = document.getElementById(s.id)
-        if (el) {
-          const top = el.offsetTop, bottom = top + el.offsetHeight
-          if (y >= top && y < bottom) { setActive(s.id); break }
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY;
+      setIsSticky(scrollPosition > 100); // Becomes sticky after scrolling 100px
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // Scroll spy effect - detect current section
+  useEffect(() => {
+    const observerOptions = {
+      threshold: 0.3,
+      rootMargin: '-100px 0px -50% 0px'
+    };
+
+    const observerCallback = (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setActiveSection(entry.target.id);
         }
+      });
+    };
+
+    const observer = new IntersectionObserver(observerCallback, observerOptions);
+
+    // Observe all sections
+    sections.forEach(({ id }) => {
+      const element = document.getElementById(id);
+      if (element) {
+        observer.observe(element);
       }
+    });
+
+    return () => {
+      sections.forEach(({ id }) => {
+        const element = document.getElementById(id);
+        if (element) {
+          observer.unobserve(element);
+        }
+      });
+    };
+  }, [sections]);
+
+  // Smooth scroll to section
+  const scrollToSection = (sectionId) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      const headerOffset = 100; // Adjust based on your header height
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
     }
-    window.addEventListener('scroll', onScroll)
-    return () => window.removeEventListener('scroll', onScroll)
-  }, [])
+  };
 
   return (
-    <nav className="sticky top-0 bg-white shadow z-50 no-print">
-      <div className="max-w-4xl mx-auto px-4">
-        <div className="flex overflow-x-auto gap-1 py-3">
-          {sections.map(s => (
-            <a key={s.id} href={`#${s.id}`}
-               className={`px-3 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-colors ${active===s.id?'bg-blue-600 text-white':'text-gray-700 hover:bg-gray-100'}`}>
-              {s.label}
-            </a>
-          ))}
-        </div>
+    <nav className={`desktop-navigation ${isSticky ? 'sticky' : ''}`}>
+      <div className="nav-container">
+        {sections.map(({ id, name }) => (
+          <button
+            key={id}
+            className={`nav-item ${activeSection === id ? 'active' : ''}`}
+            onClick={() => scrollToSection(id)}
+            aria-label={`Navigate to ${name}`}
+          >
+            {name}
+          </button>
+        ))}
       </div>
     </nav>
-  )
-}
+  );
+};
+
+export default Navigation;
