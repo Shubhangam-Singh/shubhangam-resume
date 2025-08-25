@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { Send, Mail, Phone, MapPin, Linkedin, CheckCircle, AlertCircle } from 'lucide-react'
+import { Send, Mail, Phone, MapPin, Linkedin, CheckCircle, AlertCircle, ExternalLink } from 'lucide-react'
 
 export default function Contact() {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' })
@@ -9,7 +9,7 @@ export default function Contact() {
   const [focusedField, setFocusedField] = useState('')
   const ref = useRef(null)
 
-  // Simple scroll animation hook built-in
+  // Simple scroll animation hook
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -55,44 +55,53 @@ export default function Contact() {
       setStatus('err')
       const subject = `Contact from ${formData.name}`
       const body = `Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`
-      window.location.href = `mailto:shubhangam.singh2023@vitstudent.ac.in?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
+      window.location.href = `mailto:shubhangam2005singh@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
     } finally {
       setIsSubmitting(false)
     }
   }
 
+  // Contact info with click handlers
   const contactInfo = [
     {
       icon: Mail,
       title: 'Email',
-      content: 'shubhangam.singh2023@vitstudent.ac.in',
+      content: 'Send me an email',
+      fullContent: 'shubhangam2005singh@gmail.com',
       gradient: 'from-blue-500 to-cyan-500',
       bgColor: 'bg-blue-50',
-      delay: '100ms'
+      delay: '100ms',
+      onClick: () => window.location.href = 'mailto:shubhangam2005singh@gmail.com?subject=Hello%20Shubhangam&body=Hi%20Shubhangam,%0D%0A%0D%0AI%20came%20across%20your%20portfolio%20and%20would%20like%20to%20connect.'
     },
     {
       icon: Phone,
       title: 'Phone',
-      content: '+91 8299363396',
+      content: 'Give me a call',
+      fullContent: '+91 8299363396',
       gradient: 'from-green-500 to-emerald-500',
       bgColor: 'bg-green-50',
-      delay: '200ms'
+      delay: '200ms',
+      onClick: () => window.location.href = 'tel:+918299363396'
     },
     {
       icon: MapPin,
       title: 'Location',
-      content: 'Allahabad, Uttar Pradesh — 211002',
+      content: 'Allahabad, Uttar Pradesh',
+      fullContent: 'Allahabad, UP 211002',
       gradient: 'from-purple-500 to-pink-500',
       bgColor: 'bg-purple-50',
-      delay: '300ms'
+      delay: '300ms',
+      onClick: () => window.open('https://maps.google.com/?q=Allahabad,+Uttar+Pradesh,+India', '_blank', 'noopener,noreferrer')
     },
     {
       icon: Linkedin,
       title: 'LinkedIn',
-      content: 'linkedin.com/in/shubhangam',
-      gradient: 'from-orange-500 to-red-500',
-      bgColor: 'bg-orange-50',
-      delay: '400ms'
+      content: 'Connect with me',
+      fullContent: 'Professional Profile',
+      gradient: 'from-blue-600 to-indigo-600',
+      bgColor: 'bg-blue-50',
+      delay: '400ms',
+      onClick: () => window.open('https://www.linkedin.com/in/shubhangam2005singh/', '_blank', 'noopener,noreferrer')
     }
   ]
 
@@ -102,71 +111,85 @@ export default function Contact() {
       <div className="absolute top-0 left-0 w-40 h-40 bg-gradient-to-br from-blue-200/30 to-purple-200/30 rounded-full -translate-x-20 -translate-y-20"></div>
       <div className="absolute bottom-0 right-0 w-32 h-32 bg-gradient-to-tl from-pink-200/30 to-orange-200/30 rounded-full translate-x-16 translate-y-16"></div>
       
-      <div ref={ref} className="relative z-10 p-8">
+      <div ref={ref} className="relative z-10 p-6 sm:p-8">
         {/* Animated Title */}
         <div className={`text-center mb-12 transition-all duration-1000 ${
           isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
         }`}>
-          <h2 className="section-title text-4xl font-bold mb-4">
+          <h2 className="text-3xl sm:text-4xl font-bold mb-4">
             <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
               📞 Get In Touch
             </span>
           </h2>
-          <p className="text-gray-600 text-lg max-w-2xl mx-auto">
+          <p className="text-gray-600 text-base sm:text-lg max-w-2xl mx-auto">
             Let's connect and discuss how we can work together. I'd love to hear from you!
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 max-w-6xl mx-auto">
           {/* Contact Information Cards */}
           <div className={`space-y-6 transition-all duration-1000 ${
             isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'
           }`}>
-            <h3 className="text-2xl font-bold text-gray-800 mb-8">Let's Connect!</h3>
+            <h3 className="text-xl sm:text-2xl font-bold text-gray-800 mb-8">Let's Connect!</h3>
             
             {contactInfo.map((info, index) => {
               const IconComponent = info.icon
               return (
                 <div
                   key={index}
-                  className={`group relative overflow-hidden rounded-2xl p-6 transition-all duration-500 hover:scale-105 cursor-pointer ${
+                  onClick={info.onClick}
+                  className={`group relative overflow-hidden rounded-2xl p-4 sm:p-6 transition-all duration-500 hover:scale-105 cursor-pointer ${
                     info.bgColor
-                  } border border-gray-100 shadow-md hover:shadow-xl ${
+                  } border border-gray-100 shadow-md hover:shadow-xl active:scale-95 ${
                     isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
                   }`}
                   style={{ transitionDelay: info.delay }}
+                  role="button"
+                  tabIndex={0}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      e.preventDefault()
+                      info.onClick()
+                    }
+                  }}
+                  aria-label={`${info.title}: ${info.content}`}
                 >
                   {/* Gradient overlay */}
-                  <div className={`absolute inset-0 bg-gradient-to-br ${info.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-300 rounded-2xl`}></div>
+                  <div className={`absolute inset-0 bg-gradient-to-br ${info.gradient} opacity-0 group-hover:opacity-10 group-active:opacity-15 transition-opacity duration-300 rounded-2xl`}></div>
                   
                   {/* Content */}
-                  <div className="relative z-10 flex items-center gap-4">
-                    <div className={`p-3 rounded-xl bg-gradient-to-br ${info.gradient} text-white shadow-lg group-hover:scale-110 group-hover:rotate-6 transition-all duration-300`}>
-                      <IconComponent size={24} />
+                  <div className="relative z-10 flex items-center gap-3 sm:gap-4">
+                    <div className={`p-2.5 sm:p-3 rounded-xl bg-gradient-to-br ${info.gradient} text-white shadow-lg group-hover:scale-110 group-hover:rotate-6 group-active:scale-95 transition-all duration-300`}>
+                      <IconComponent size={20} className="sm:w-6 sm:h-6" />
                     </div>
-                    <div className="flex-1">
-                      <h4 className="font-semibold text-gray-800 mb-1 group-hover:text-gray-900 transition-colors duration-300">
+                    <div className="flex-1 min-w-0">
+                      <h4 className="font-semibold text-gray-800 mb-1 group-hover:text-gray-900 transition-colors duration-300 text-sm sm:text-base">
                         {info.title}
                       </h4>
-                      <p className="text-gray-600 group-hover:text-blue-600 transition-colors duration-300 break-all">
+                      <p className="text-gray-600 group-hover:text-blue-600 transition-colors duration-300 text-sm">
                         {info.content}
+                      </p>
+                      <p className="text-xs text-gray-500 mt-0.5 truncate">
+                        {info.fullContent}
                       </p>
                     </div>
                     
-                    {/* Arrow icon */}
+                    {/* Enhanced click indicator */}
                     <div className="opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-x-4 group-hover:translate-x-0">
-                      <div className={`p-2 rounded-full bg-gradient-to-r ${info.gradient} text-white shadow-md`}>
-                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                        </svg>
+                      <div className={`p-2 rounded-full bg-gradient-to-r ${info.gradient} text-white shadow-md group-active:scale-75 transition-transform duration-150`}>
+                        <ExternalLink className="w-3 h-3 sm:w-4 sm:h-4" />
                       </div>
                     </div>
                   </div>
                   
-                  {/* Shine effect */}
+                  {/* Enhanced shine effect */}
                   <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -skew-x-12 transform -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
+                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/25 to-transparent -skew-x-12 transform -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
                   </div>
+
+                  {/* Click ripple effect */}
+                  <div className="absolute inset-0 bg-white opacity-0 group-active:opacity-20 group-active:animate-ping rounded-2xl transition-opacity duration-150"></div>
                 </div>
               )
             })}
@@ -176,7 +199,7 @@ export default function Contact() {
           <div className={`transition-all duration-1000 ${
             isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'
           }`} style={{ transitionDelay: '500ms' }}>
-            <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-2xl p-8 border border-white/50">
+            <div className="bg-white/90 backdrop-blur-sm rounded-2xl shadow-2xl p-6 sm:p-8 border border-white/50">
               <form onSubmit={handleSubmit} className="space-y-6">
                 {/* Name Field */}
                 <div className="relative">
@@ -190,7 +213,7 @@ export default function Contact() {
                   </label>
                   <div className="relative">
                     <input
-                      className={`w-full px-4 py-3 border-2 rounded-xl transition-all duration-300 bg-white/50 backdrop-blur-sm focus:outline-none focus:scale-105 hover:border-blue-300 ${
+                      className={`w-full px-4 py-3 border-2 rounded-xl transition-all duration-300 bg-white/70 backdrop-blur-sm focus:outline-none focus:scale-105 hover:border-blue-300 ${
                         focusedField === 'name' 
                           ? 'border-blue-500 shadow-lg shadow-blue-500/20 bg-white' 
                           : 'border-gray-200'
@@ -201,6 +224,7 @@ export default function Contact() {
                       onChange={handleChange}
                       onFocus={() => setFocusedField('name')}
                       onBlur={() => setFocusedField('')}
+                      placeholder="Your full name"
                       required
                     />
                     {formData.name && (
@@ -224,7 +248,7 @@ export default function Contact() {
                   <div className="relative">
                     <input
                       type="email"
-                      className={`w-full px-4 py-3 border-2 rounded-xl transition-all duration-300 bg-white/50 backdrop-blur-sm focus:outline-none focus:scale-105 hover:border-blue-300 ${
+                      className={`w-full px-4 py-3 border-2 rounded-xl transition-all duration-300 bg-white/70 backdrop-blur-sm focus:outline-none focus:scale-105 hover:border-blue-300 ${
                         focusedField === 'email' 
                           ? 'border-blue-500 shadow-lg shadow-blue-500/20 bg-white' 
                           : 'border-gray-200'
@@ -235,6 +259,7 @@ export default function Contact() {
                       onChange={handleChange}
                       onFocus={() => setFocusedField('email')}
                       onBlur={() => setFocusedField('')}
+                      placeholder="your.email@example.com"
                       required
                     />
                     {formData.email && (
@@ -257,8 +282,8 @@ export default function Contact() {
                   </label>
                   <div className="relative">
                     <textarea
-                      rows="5"
-                      className={`w-full px-4 py-3 border-2 rounded-xl resize-none transition-all duration-300 bg-white/50 backdrop-blur-sm focus:outline-none focus:scale-105 hover:border-blue-300 ${
+                      rows="4"
+                      className={`w-full px-4 py-3 border-2 rounded-xl resize-none transition-all duration-300 bg-white/70 backdrop-blur-sm focus:outline-none focus:scale-105 hover:border-blue-300 ${
                         focusedField === 'message' 
                           ? 'border-blue-500 shadow-lg shadow-blue-500/20 bg-white' 
                           : 'border-gray-200'
@@ -269,6 +294,7 @@ export default function Contact() {
                       onChange={handleChange}
                       onFocus={() => setFocusedField('message')}
                       onBlur={() => setFocusedField('')}
+                      placeholder="Tell me about your project or just say hello!"
                       required
                     />
                     {formData.message && (
@@ -286,7 +312,7 @@ export default function Contact() {
                   className={`group relative w-full py-4 px-6 rounded-xl font-semibold text-white transition-all duration-300 overflow-hidden ${
                     isSubmitting 
                       ? 'bg-gray-400 cursor-not-allowed' 
-                      : 'bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 shadow-lg hover:shadow-xl hover:scale-105 focus:scale-105'
+                      : 'bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 shadow-lg hover:shadow-xl hover:scale-105 focus:scale-105 active:scale-95'
                   }`}
                 >
                   {/* Button background animation */}
@@ -313,7 +339,7 @@ export default function Contact() {
                 </button>
               </form>
 
-              {/* Status Messages with Animations */}
+              {/* Status Messages */}
               {status === 'ok' && (
                 <div className="mt-6 p-4 bg-green-50 border-2 border-green-200 rounded-xl text-green-800 animate-fade-in-up">
                   <div className="flex items-center gap-3">
@@ -336,7 +362,7 @@ export default function Contact() {
                     </div>
                     <div>
                       <h4 className="font-semibold">Oops! Something went wrong.</h4>
-                      <p className="text-sm text-red-600 mt-1">Please try again or email me directly.</p>
+                      <p className="text-sm text-red-600 mt-1">Please try again or contact me directly.</p>
                     </div>
                   </div>
                 </div>
@@ -346,20 +372,47 @@ export default function Contact() {
         </div>
 
         {/* Bottom CTA */}
-        <div className={`text-center mt-12 transition-all duration-1000 ${
+        <div className={`text-center mt-8 sm:mt-12 transition-all duration-1000 ${
           isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
         }`} style={{ transitionDelay: '800ms' }}>
-          <div className="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-blue-50 to-purple-50 rounded-full border border-blue-100 shadow-md">
+          <div className="inline-flex items-center gap-3 px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-blue-50 to-purple-50 rounded-full border border-blue-100 shadow-md">
             <div className="flex items-center gap-2">
               <div className="w-3 h-3 bg-gradient-to-r from-green-500 to-blue-500 rounded-full animate-pulse"></div>
-              <span className="text-gray-600 font-medium">
+              <span className="text-gray-600 font-medium text-sm sm:text-base">
                 Usually responds within <strong className="text-blue-600">24 hours</strong>
               </span>
             </div>
-            <div className="text-2xl animate-bounce-subtle">⚡</div>
+            <div className="text-xl sm:text-2xl animate-bounce-subtle">⚡</div>
           </div>
         </div>
       </div>
+
+      {/* Custom CSS */}
+      <style jsx>{`
+        @keyframes bounce-subtle {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-3px); }
+        }
+        
+        @keyframes fade-in-up {
+          from {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        
+        .animate-bounce-subtle {
+          animation: bounce-subtle 2s ease-in-out infinite;
+        }
+        
+        .animate-fade-in-up {
+          animation: fade-in-up 0.5s ease-out;
+        }
+      `}</style>
     </div>
   )
 }

@@ -656,9 +656,7 @@ export default function App () {
             window.scrollTo({ top: 0, behavior: 'smooth' });
             setCurrentSection('summary');
           }}
-          className={`fixed z-50 p-4 rounded-full bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 text-white shadow-2xl hover:shadow-3xl transition-all duration-300 transform hover:scale-110 hover:rotate-3 ${
-            isMobile ? 'bottom-28 right-4' : 'bottom-6 right-6'
-          }`}
+          className={`fixed z-50 p-4 rounded-full bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 text-white shadow-2xl hover:shadow-3xl transition-all duration-300 transform hover:scale-110 hover:rotate-3 ${isMobile ? 'bottom-28 left-4' : 'bottom-6 left-6'}`}
           style={{
             boxShadow: '0 10px 30px rgba(59, 130, 246, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.1)',
             backdropFilter: 'blur(10px)'
