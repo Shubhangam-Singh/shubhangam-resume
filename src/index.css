@@ -1,19 +1,12 @@
-/* Mobile Navigation Import */
+/* ===== IMPORTS ===== */
 @import './styles/MobileNavigation.css';
 
-/* Ensure smooth scrolling */
+/* ===== BASE STYLES ===== */
 html {
   scroll-behavior: smooth;
 }
 
-/* Add padding bottom on mobile to account for navigation */
-@media (max-width: 768px) {
-  body {
-    padding-bottom: 100px; /* Space for mobile nav */
-  }
-}
-
-/* Dark theme support for mobile nav */
+/* ===== THEME VARIABLES ===== */
 :root {
   --mobile-nav-bg: rgba(255, 255, 255, 0.95);
   --mobile-nav-text: #333;
@@ -26,3 +19,311 @@ html {
   --mobile-nav-border: rgba(255, 255, 255, 0.1);
 }
 
+/* ===== LAYOUT & SPACING ===== */
+@media (max-width: 768px) {
+  body {
+    padding-bottom: 100px; /* Space for mobile nav */
+  }
+}
+
+/* ===== CONTENT CARDS ===== */
+.portfolio-content {
+  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 20px;
+  padding: 20px;
+  margin: 20px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+.portfolio-content section {
+  backdrop-filter: blur(5px);
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 15px;
+  padding: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.card-3d-enhanced {
+  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease;
+}
+
+.card-3d-enhanced:hover {
+  background: rgba(255, 255, 255, 0.95);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+}
+
+/* ===== SCROLLBAR ===== */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 4px;
+  transition: background 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+/* ===== ANIMATIONS ===== */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* ===== EFFECTS ===== */
+.glow {
+  box-shadow: 0 0 20px rgba(79, 172, 254, 0.3);
+}
+
+.glow-hover:hover {
+  box-shadow: 0 0 30px rgba(79, 172, 254, 0.6);
+  transition: all 0.3s ease;
+}
+
+/* ===== NAVBAR STABILIZATION ===== */
+canvas {
+  position: fixed !important;
+  z-index: -1 !important;
+  pointer-events: none !important;
+}
+
+nav {
+  position: fixed !important;
+  z-index: 1000 !important;
+}
+
+.mobile-navigation {
+  position: fixed !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  z-index: 9999 !important;
+}
+
+/* ===== CUSTOM CURSOR ===== */
+.custom-cursor-circle {
+  position: fixed;
+  width: 40px;
+  height: 40px;
+  border: 2px solid rgba(255, 255, 255, 0.8);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 9999;
+  transition: border-color 0.3s ease, background-color 0.3s ease, width 0.2s ease, height 0.2s ease;
+  mix-blend-mode: difference;
+  backdrop-filter: blur(2px);
+  will-change: transform;
+}
+
+.custom-cursor-dot {
+  position: fixed;
+  width: 8px;
+  height: 8px;
+  background-color: white;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 10000;
+  transition: background-color 0.3s ease, width 0.2s ease, height 0.2s ease, box-shadow 0.3s ease;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+  will-change: transform;
+}
+
+/* Cursor Hover States */
+.custom-cursor-circle.hovering {
+  width: 60px !important;
+  height: 60px !important;
+  border-width: 3px !important;
+  animation: cursorPulse 1.5s infinite ease-in-out;
+}
+
+.custom-cursor-dot.hovering {
+  width: 4px !important;
+  height: 4px !important;
+}
+
+/* Cursor Click States */
+.custom-cursor-circle.clicking {
+  width: 50px !important;
+  height: 50px !important;
+  border-width: 4px !important;
+  animation: clickBounce 0.3s ease-out;
+}
+
+.custom-cursor-dot.clicking {
+  width: 12px !important;
+  height: 12px !important;
+  animation: dotExpand 0.3s ease-out;
+}
+
+/* Adaptive Cursor Colors */
+.custom-cursor-circle.on-light {
+  border-color: rgba(0, 0, 0, 0.6) !important;
+  background: rgba(0, 0, 0, 0.05) !important;
+}
+
+.custom-cursor-dot.on-light {
+  background-color: #333 !important;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3) !important;
+}
+
+.custom-cursor-circle.on-colored {
+  border-color: rgba(255, 255, 255, 0.9) !important;
+  background: rgba(255, 255, 255, 0.1) !important;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2) !important;
+}
+
+.custom-cursor-dot.on-colored,
+.custom-cursor-dot.gradient-transition {
+  background: linear-gradient(45deg, #ff6b6b, #4ecdc4) !important;
+  box-shadow: 0 0 15px rgba(255, 107, 107, 0.5) !important;
+  animation: gradientShift 3s ease-in-out infinite;
+}
+
+/* Ripple Effect */
+.cursor-ripple {
+  position: fixed;
+  width: 20px;
+  height: 20px;
+  border: 2px solid rgba(255, 255, 255, 0.6);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 9998;
+  animation: rippleExpand 0.6s ease-out forwards;
+}
+
+.cursor-ripple.on-light {
+  border-color: rgba(0, 0, 0, 0.4);
+}
+
+.cursor-ripple.on-colored {
+  border-color: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+}
+
+/* ===== CURSOR ANIMATIONS ===== */
+@keyframes cursorPulse {
+  0%, 100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.1);
+    opacity: 1;
+  }
+}
+
+@keyframes clickBounce {
+  0% { transform: translate(-50%, -50%) scale(1); }
+  50% { transform: translate(-50%, -50%) scale(0.8); }
+  100% { transform: translate(-50%, -50%) scale(1.2); }
+}
+
+@keyframes dotExpand {
+  0% { transform: translate(-50%, -50%) scale(1); }
+  50% { transform: translate(-50%, -50%) scale(0.5); }
+  100% { transform: translate(-50%, -50%) scale(1.5); }
+}
+
+@keyframes rippleExpand {
+  0% { width: 20px; height: 20px; opacity: 0.8; }
+  100% { width: 100px; height: 100px; opacity: 0; }
+}
+
+@keyframes gradientShift {
+  0%, 100% { background: linear-gradient(45deg, #667eea, #764ba2); }
+  50% { background: linear-gradient(45deg, #f093fb, #f5576c); }
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+@media (max-width: 768px) {
+  .custom-cursor-circle,
+  .custom-cursor-dot,
+  .cursor-ripple {
+    display: none;
+  }
+}
+
+/* ===== ACCESSIBILITY ===== */
+@media (prefers-reduced-motion: reduce) {
+  .custom-cursor-circle,
+  .custom-cursor-dot {
+    transition: none !important;
+    animation: none !important;
+  }
+  
+  .cursor-ripple,
+  .animate-float,
+  .glow {
+    animation: none !important;
+  }
+  
+  html {
+    scroll-behavior: auto;
+  }
+}
+/* === INFINITE MARQUEE ========================================= */
+.marquee {
+  --speed: 20s;          /* ⏩ overall speed – tweak per instance          */
+  --gap: 3rem;           /* horizontal gap between items                  */
+
+  position: relative;
+  overflow: hidden;
+}
+
+/* Track that actually moves */
+.marquee__track,
+.marquee__track::after {
+  display: inline-flex;
+  gap: var(--gap);
+  white-space: nowrap;
+  animation: marquee var(--speed) linear infinite;
+}
+
+/* Create a seamless duplicate without extra HTML */
+.marquee__track::after {
+  content: attr(data-dup) attr(data-dup);
+}
+
+/* Item styling – adjust freely */
+.marquee__track > * {
+  font-weight: 600;
+  padding: .35rem .75rem;
+  border-radius: .4rem;
+  background: rgba(255,255,255,.12);
+  color: var(--mobile-nav-text);
+  transition: background .25s;
+}
+.marquee__track > *:hover { background: rgba(255,255,255,.25); }
+
+/* Keyframes */
+@keyframes marquee {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); } /* -50 % because we have two tracks */
+}
+
+/* Pause on hover (optional) */
+.marquee:hover .marquee__track { animation-play-state: paused; }
+
+/* Reduced-motion users: stop the animation */
+@media (prefers-reduced-motion: reduce) {
+  .marquee__track { animation: none; }
+}
