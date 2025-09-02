@@ -192,7 +192,7 @@ Contributions are welcome! Please feel free to submit a Pull Request. For major 
 - 📧 Email: [shubhangam2005singh@gmail.com](mailto:shubhangam2005singh@gmail.com)
 - 💼 LinkedIn: [linkedin.com/in/shubhangam2005singh](https://www.linkedin.com/in/shubhangam2005singh/)
 - 🐙 GitHub: [@Shubhangam-Singh](https://github.com/Shubhangam-Singh)
-- 🌐 Website: [shubhangam-singh.github.io/shubhangam-resume](https://shubhangam-singh.github.io/shubhangam-resume/)
+- 🌐 Website: [https://shubhangam-resume.vercel.app/](https://shubhangam-resume.vercel.app/)
 
 ## 📄 License
 
