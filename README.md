@@ -4,7 +4,7 @@
 [![Vite](https://img.shields.io/badge/Vite-5.x-646CFF?style=flat-square&logo=vite&logoColor=white)](https://vitejs.dev/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3.x-38B2AC?style=flat-square&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
 [![GitHub Pages](https://img.shields.io/badge/Deployed%20on-GitHub%20Pages-222222?style=flat-square&logo=github&logoColor=white)](https://pages.github.com/)
-[![Live Demo](https://img.shields.io/badge/Live-Demo-success?style=flat-square&logo=web&logoColor=white)](https://shubhangam-singh.github.io/shubhangam-resume/)
+[![Live Demo](https://img.shields.io/badge/Live-Demo-success?style=flat-square&logo=web&logoColor=white)](https://shubhangam-resume.vercel.app/)
 
 A modern, responsive, and professional resume website built using **React**, **Vite**, and **Tailwind CSS**. This website showcases my education, skills, projects, achievements, and contact details in an elegant and interactive format, complete with a downloadable ATS-friendly PDF resume.
 
