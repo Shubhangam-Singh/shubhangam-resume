@@ -8,7 +8,7 @@
 
 A modern, responsive, and professional resume website built using **React**, **Vite**, and **Tailwind CSS**. This website showcases my education, skills, projects, achievements, and contact details in an elegant and interactive format, complete with a downloadable ATS-friendly PDF resume.
 
-## 🚀 [Live Demo](https://shubhangam-singh.github.io/shubhangam-resume/)
+## 🚀 [Live Demo](https://shubhangam-resume.vercel.app/)
 
 ## 📱 Screenshots
 ![Desktop View](https://github.com/user-attachments/assets/2a8e2e24-d196-43e8-a089-deba79829d05)
